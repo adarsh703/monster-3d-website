@@ -59,16 +59,16 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-              className="w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20"
+              className="w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-12 lg:gap-20"
             >
               {/* Left Column: Title & Description */}
-              <div className={`lg:col-span-7 flex flex-col justify-center backdrop-blur-lg p-10 rounded-2xl border transition-colors duration-800 ${isLight ? 'bg-white/40 border-black/10 shadow-2xl' : 'bg-black/50 border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.8)]'}`}>
+              <div className={`lg:col-span-7 flex flex-col justify-center backdrop-blur-lg p-6 md:p-10 rounded-2xl border transition-colors duration-800 ${isLight ? 'bg-white/40 border-black/10 shadow-2xl' : 'bg-black/50 border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.8)]'}`}>
                 <div className="mb-6 flex items-center gap-4">
                   <div className="h-[2px] w-12" style={{ backgroundColor: weapon.themeColor }}></div>
                   <span className={`uppercase tracking-[0.3em] text-sm font-bold drop-shadow-lg ${isLight ? 'text-gray-700' : 'text-gray-300'}`}>Classified Intel</span>
                 </div>
                 <h3 
-                  className="text-6xl md:text-8xl font-bold mb-10 uppercase tracking-tighter leading-none transition-colors duration-800"
+                  className="text-4xl sm:text-5xl md:text-8xl font-bold mb-10 uppercase tracking-tighter leading-none transition-colors duration-800"
                   style={{ color: 'var(--text-primary)', textShadow: isLight ? 'none' : '0 4px 20px rgba(0,0,0,0.8)' }}
                 >
                   {weapon.detailsSection.title}
@@ -81,7 +81,7 @@ export default function Home() {
                   {weapon.stats.map((stat, idx) => (
                     <div key={idx} className="flex flex-col">
                       <span 
-                        className="text-5xl font-bold mb-2 tracking-tighter drop-shadow-lg" 
+                        className="text-3xl md:text-5xl font-bold mb-2 tracking-tighter drop-shadow-lg" 
                         style={{ color: weapon.themeColor }}
                       >
                         {stat.val}
@@ -96,7 +96,7 @@ export default function Home() {
               
               {/* Right Column: Forge Details & Tags */}
               <div className="lg:col-span-5 flex flex-col justify-center gap-12">
-                <div className={`backdrop-blur-2xl p-10 lg:p-14 border-l-4 relative overflow-hidden shadow-2xl transition-colors duration-800 ${isLight ? 'bg-white/50' : 'bg-black/60'}`} style={{ borderLeftColor: weapon.themeColor }}>
+                <div className={`backdrop-blur-2xl p-6 md:p-10 lg:p-14 border-l-4 relative overflow-hidden shadow-2xl transition-colors duration-800 ${isLight ? 'bg-white/50' : 'bg-black/60'}`} style={{ borderLeftColor: weapon.themeColor }}>
                   {/* Subtle corner accent */}
                   <div className={`absolute top-0 right-0 w-16 h-16 border-t border-r ${isLight ? 'border-black/10' : 'border-white/10'}`} />
                   
@@ -129,7 +129,7 @@ export default function Home() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-              className={`relative w-full backdrop-blur-2xl border p-10 md:p-24 overflow-hidden transition-colors duration-800 ${isLight ? 'bg-white/60 border-black/10' : 'bg-[#050505]/80 border-white/10'}`}
+              className={`relative w-full backdrop-blur-2xl border p-6 sm:p-10 md:p-24 overflow-hidden transition-colors duration-800 ${isLight ? 'bg-white/60 border-black/10' : 'bg-[#050505]/80 border-white/10'}`}
             >
               {/* Cinematic Glow Background */}
               <div 
@@ -137,27 +137,27 @@ export default function Home() {
                 style={{ backgroundColor: weapon.themeColor }}
               />
 
-              <div className="relative z-10 flex flex-col lg:flex-row justify-between items-center gap-20">
+              <div className="relative z-10 flex flex-col lg:flex-row justify-between items-center gap-12 lg:gap-20">
                 <div className="flex-1">
                   <div className={`mb-4 inline-flex items-center gap-3 px-4 py-1.5 rounded-full border ${isLight ? 'border-black/10 bg-white/40' : 'border-white/10 bg-white/5'}`}>
                     <div className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: weapon.themeColor }} />
                     <span className={`text-xs font-bold uppercase tracking-[0.2em] ${isLight ? 'text-gray-900' : 'text-white'}`}>Target Acquired</span>
                   </div>
                   
-                  <h3 className="text-7xl md:text-9xl font-bold mb-4 uppercase tracking-tighter leading-none transition-colors duration-800" style={{ color: 'var(--text-primary)' }}>
+                  <h3 className="text-5xl sm:text-6xl md:text-9xl font-bold mb-4 uppercase tracking-tighter leading-none transition-colors duration-800" style={{ color: 'var(--text-primary)' }}>
                     {weapon.name}
                   </h3>
                   <p className={`text-2xl font-bold uppercase tracking-widest mb-12 ${isLight ? 'text-gray-600' : 'text-gray-400'}`}>
                     {weapon.subName}
                   </p>
                   
-                  <div className="flex items-baseline gap-6 mb-12">
-                    <span className="text-6xl md:text-8xl font-bold tracking-tighter transition-colors duration-800" style={{ color: 'var(--text-primary)' }}>{weapon.unlockSection.price}</span>
+                  <div className="flex items-baseline gap-4 md:gap-6 mb-8 md:mb-12">
+                    <span className="text-4xl sm:text-5xl md:text-8xl font-bold tracking-tighter transition-colors duration-800" style={{ color: 'var(--text-primary)' }}>{weapon.unlockSection.price}</span>
                     <span className={`font-bold uppercase tracking-widest text-lg ${isLight ? 'text-gray-600' : 'text-gray-500'}`}>{weapon.unlockSection.unit}</span>
                   </div>
                   
                   <button 
-                    className="group relative px-16 py-6 bg-white text-black font-bold text-xl uppercase tracking-widest overflow-hidden hover:scale-[1.02] transition-transform duration-300 shadow-[0_0_20px_rgba(255,255,255,0.1)]"
+                    className="group relative w-full md:w-auto px-8 md:px-16 py-4 md:py-6 bg-white text-black font-bold text-xl uppercase tracking-widest overflow-hidden hover:scale-[1.02] transition-transform duration-300 shadow-[0_0_20px_rgba(255,255,255,0.1)]"
                   >
                     <span className="relative z-10">Access Protocol</span>
                     <div 
@@ -167,7 +167,7 @@ export default function Home() {
                   </button>
                 </div>
                 
-                <div className={`w-full lg:w-[450px] shrink-0 border backdrop-blur-md p-10 transition-colors duration-800 ${isLight ? 'bg-white/40 border-black/10' : 'bg-black/40 border-white/10'}`}>
+                <div className={`w-full lg:w-[450px] shrink-0 border backdrop-blur-md p-6 md:p-10 transition-colors duration-800 ${isLight ? 'bg-white/40 border-black/10' : 'bg-black/40 border-white/10'}`}>
                   <h4 className={`font-bold mb-8 text-2xl uppercase tracking-widest border-b pb-6 transition-colors duration-800 ${isLight ? 'text-gray-900 border-black/10' : 'text-white border-white/10'}`}>
                     Deployment Specs
                   </h4>

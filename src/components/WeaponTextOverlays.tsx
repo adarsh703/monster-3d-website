@@ -34,7 +34,7 @@ export default function WeaponTextOverlays({ weapon, scrollProgress }: WeaponTex
         style={{ opacity: opacity1, y: y1 }}
       >
         <h1 
-          className="text-6xl md:text-8xl font-bold mb-4 tracking-tighter uppercase text-[var(--text-primary)]"
+          className="text-4xl sm:text-5xl md:text-8xl font-bold mb-4 tracking-tighter uppercase text-[var(--text-primary)]"
           style={{ textShadow: `0 0 20px ${weapon.themeColor}80` }}
         >
           {weapon.section1.title}
@@ -50,7 +50,7 @@ export default function WeaponTextOverlays({ weapon, scrollProgress }: WeaponTex
         style={{ opacity: opacity2, y: y2 }}
       >
         <h2 
-          className="text-5xl md:text-6xl font-bold mb-4 tracking-tight uppercase text-[var(--text-primary)]"
+          className="text-3xl sm:text-4xl md:text-6xl font-bold mb-4 tracking-tight uppercase text-[var(--text-primary)]"
           style={{ textShadow: `0 0 20px ${weapon.themeColor}80` }}
         >
           {weapon.section2.title}
@@ -66,7 +66,7 @@ export default function WeaponTextOverlays({ weapon, scrollProgress }: WeaponTex
         style={{ opacity: opacity3, y: y3 }}
       >
         <h2 
-          className="text-5xl md:text-6xl font-bold mb-4 tracking-tight uppercase text-[var(--text-primary)]"
+          className="text-3xl sm:text-4xl md:text-6xl font-bold mb-4 tracking-tight uppercase text-[var(--text-primary)]"
           style={{ textShadow: `0 0 20px ${weapon.themeColor}80` }}
         >
           {weapon.section3.title}
@@ -82,7 +82,7 @@ export default function WeaponTextOverlays({ weapon, scrollProgress }: WeaponTex
         style={{ opacity: opacity4, y: y4 }}
       >
         <h2 
-          className="text-5xl md:text-7xl font-bold mb-4 tracking-tight uppercase text-[var(--text-primary)]"
+          className="text-3xl sm:text-4xl md:text-7xl font-bold mb-4 tracking-tight uppercase text-[var(--text-primary)]"
           style={{ textShadow: `0 0 20px ${weapon.themeColor}80` }}
         >
           {weapon.section4.title}
