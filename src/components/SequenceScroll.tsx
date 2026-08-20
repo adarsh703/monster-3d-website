@@ -16,10 +16,14 @@ export default function SequenceScroll({ weapon }: SequenceScrollProps) {
   const { scrollYProgress } = useScroll();
 
   const [images, setImages] = useState<HTMLImageElement[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const frameCount = 240; // The actual frame count of the animation
 
   // Preload images
   useEffect(() => {
+    setIsLoading(true);
+    setImages([]); // Clear old images instantly
+
     const loadedImages: HTMLImageElement[] = [];
     let loadedCount = 0;
 
@@ -32,6 +36,7 @@ export default function SequenceScroll({ weapon }: SequenceScrollProps) {
         loadedCount++;
         if (loadedCount === frameCount) {
           setImages(loadedImages);
+          setIsLoading(false);
           if (canvasRef.current && loadedImages[0]) {
             drawFrame(0, loadedImages[0]);
           }
@@ -132,9 +137,18 @@ export default function SequenceScroll({ weapon }: SequenceScrollProps) {
       >
         <canvas 
           ref={canvasRef} 
-          className="w-full h-full object-cover opacity-90 mix-blend-normal"
+          className={`w-full h-full object-cover mix-blend-normal transition-opacity duration-1000 ease-in-out ${isLoading ? 'opacity-0' : 'opacity-90'}`}
           style={{ width: '100%', height: '100%', pointerEvents: 'none' }} 
         />
+        
+        {/* Loading Spinner */}
+        <div className={`absolute inset-0 flex flex-col items-center justify-center transition-opacity duration-500 z-10 ${isLoading ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+          <div className="w-16 h-16 border-4 border-black/10 rounded-full animate-spin mb-6" style={{ borderTopColor: weapon.themeColor, borderRightColor: 'rgba(255,255,255,0.1)', borderBottomColor: 'rgba(255,255,255,0.1)', borderLeftColor: 'rgba(255,255,255,0.1)' }}></div>
+          <span className="uppercase tracking-[0.3em] text-sm font-bold animate-pulse drop-shadow-md" style={{ color: weapon.themeColor }}>
+            Calibrating Assets...
+          </span>
+        </div>
+
         {/* Subtle Tech Grid Overlay */}
         <div 
           className="absolute inset-0 pointer-events-none opacity-20"
