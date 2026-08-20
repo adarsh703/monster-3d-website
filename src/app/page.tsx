@@ -215,8 +215,8 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Tactical HUD Overlay (Hides injected preview logos) */}
-      <div className={`fixed bottom-28 right-10 z-[99999] flex flex-col gap-3 px-6 py-4 rounded-tl-2xl rounded-br-2xl border backdrop-blur-xl shadow-2xl transition-colors duration-800 ${isLight ? 'bg-white/90 border-black/20' : 'bg-[#050505]/95 border-white/10'}`}>
+      {/* Tactical HUD Overlay (Hides injected preview logos on desktop) */}
+      <div className={`hidden md:flex fixed bottom-32 right-10 z-[99999] flex-col gap-3 px-6 py-4 rounded-tl-2xl rounded-br-2xl border backdrop-blur-xl shadow-2xl transition-colors duration-800 ${isLight ? 'bg-white/90 border-black/20' : 'bg-[#050505]/95 border-white/10'}`}>
         <div className="flex items-center gap-4">
           <div className="relative flex items-center justify-center w-4 h-4">
             <div className="absolute inset-0 rounded-full animate-ping opacity-50" style={{ backgroundColor: weapon.themeColor }}></div>
