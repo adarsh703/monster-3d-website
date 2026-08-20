@@ -16,7 +16,7 @@ export default function SequenceScroll({ weapon }: SequenceScrollProps) {
   const { scrollYProgress } = useScroll();
 
   const [images, setImages] = useState<HTMLImageElement[]>([]);
-  const frameCount = 250; // The actual frame count of the animation
+  const frameCount = 240; // The actual frame count of the animation
 
   // Preload images
   useEffect(() => {
