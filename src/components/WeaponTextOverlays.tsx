@@ -30,7 +30,7 @@ export default function WeaponTextOverlays({ weapon, scrollProgress }: WeaponTex
     <div className="relative w-full h-full max-w-7xl mx-auto px-6 ">
       {/* Section 1 */}
       <motion.div 
-        className="absolute top-1/4 left-6 md:left-24 max-w-xl"
+        className="absolute top-1/4 left-6 md:left-24 max-w-xl w-full break-words px-4"
         style={{ opacity: opacity1, y: y1 }}
       >
         <h1 
@@ -46,7 +46,7 @@ export default function WeaponTextOverlays({ weapon, scrollProgress }: WeaponTex
 
       {/* Section 2 */}
       <motion.div 
-        className="absolute top-1/3 right-6 md:right-24 max-w-lg text-right"
+        className="absolute top-1/3 right-6 md:right-24 max-w-lg w-full break-words px-4 text-right"
         style={{ opacity: opacity2, y: y2 }}
       >
         <h2 
@@ -62,7 +62,7 @@ export default function WeaponTextOverlays({ weapon, scrollProgress }: WeaponTex
 
       {/* Section 3 */}
       <motion.div 
-        className="absolute top-1/2 left-6 md:left-24 max-w-lg -translate-y-1/2"
+        className="absolute top-1/2 left-6 md:left-24 max-w-lg w-full break-words px-4 -translate-y-1/2"
         style={{ opacity: opacity3, y: y3 }}
       >
         <h2 
@@ -78,7 +78,7 @@ export default function WeaponTextOverlays({ weapon, scrollProgress }: WeaponTex
 
       {/* Section 4 */}
       <motion.div 
-        className="absolute bottom-1/4 right-6 md:right-24 max-w-lg text-right"
+        className="absolute bottom-1/4 right-6 md:right-24 max-w-lg w-full break-words px-4 text-right"
         style={{ opacity: opacity4, y: y4 }}
       >
         <h2 

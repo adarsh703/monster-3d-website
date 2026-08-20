@@ -77,7 +77,7 @@ export default function Home() {
                   {weapon.detailsSection.description}
                 </p>
                 
-                <div className={`mt-12 grid grid-cols-3 gap-8 border-t pt-10 transition-colors duration-800 ${isLight ? 'border-black/10' : 'border-white/20'}`}>
+                <div className={`mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 border-t pt-10 transition-colors duration-800 ${isLight ? 'border-black/10' : 'border-white/20'}`}>
                   {weapon.stats.map((stat, idx) => (
                     <div key={idx} className="flex flex-col">
                       <span 
@@ -151,7 +151,7 @@ export default function Home() {
                     {weapon.subName}
                   </p>
                   
-                  <div className="flex items-baseline gap-4 md:gap-6 mb-8 md:mb-12">
+                  <div className="flex flex-wrap items-baseline gap-4 md:gap-6 mb-8 md:mb-12">
                     <span className="text-4xl sm:text-5xl md:text-8xl font-bold tracking-tighter transition-colors duration-800" style={{ color: 'var(--text-primary)' }}>{weapon.unlockSection.price}</span>
                     <span className={`font-bold uppercase tracking-widest text-lg ${isLight ? 'text-gray-600' : 'text-gray-500'}`}>{weapon.unlockSection.unit}</span>
                   </div>
