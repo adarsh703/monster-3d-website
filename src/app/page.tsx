@@ -37,23 +37,37 @@ export default function Home() {
   const weapon = weapons[currentIndex];
   const isLight = weapon.themeMode === 'light';
 
-  // Handle Audio Tracks
+  // Handle Audio Tracks - Initialize once
   useEffect(() => {
     if (!audioRef.current) {
-      audioRef.current = new Audio();
+      audioRef.current = new Audio('/original-audio.mp3');
       audioRef.current.loop = true;
     }
+  }, []);
+
+  const handleWeaponSwitch = (idx: number) => {
+    setCurrentIndex(idx);
+    if (audioRef.current) {
+      const wasPlaying = !audioRef.current.paused && !isMuted;
+      audioRef.current.src = idx === 0 ? '/original-audio.mp3' : '/ultra-audio.mp3';
+      if (wasPlaying) {
+        audioRef.current.play().catch(e => console.log('Autoplay blocked:', e));
+      }
+    }
+  };
+
+  const toggleAudio = () => {
+    if (!audioRef.current) return;
     
-    audioRef.current.src = currentIndex === 0 ? '/original-audio.mp3' : '/ultra-audio.mp3';
-    
-    if (!isMuted) {
-      audioRef.current.play().catch(e => console.log('Audio autoplay blocked', e));
+    if (isMuted) {
+      // Must be synchronous with click event for mobile Safari
+      audioRef.current.play().catch(e => console.log('Autoplay blocked:', e));
+      setIsMuted(false);
     } else {
       audioRef.current.pause();
+      setIsMuted(true);
     }
-  }, [currentIndex, isMuted]);
-
-  const toggleAudio = () => setIsMuted(!isMuted);
+  };
 
   return (
     <main className="min-h-screen bg-transparent  overflow-x-hidden">
@@ -220,7 +234,7 @@ export default function Home() {
           {weapons.map((w, idx) => (
             <button
               key={w.id}
-              onClick={() => setCurrentIndex(idx)}
+              onClick={() => handleWeaponSwitch(idx)}
               className={`px-8 py-3 rounded-full text-sm font-bold uppercase tracking-widest transition-all ${
                 currentIndex === idx 
                   ? 'text-black' 
@@ -233,6 +247,19 @@ export default function Home() {
           ))}
         </div>
       </div>
+
+      {/* Mobile Audio Toggle */}
+      <button 
+        onClick={toggleAudio}
+        className={`md:hidden fixed bottom-12 left-6 z-[99999] p-3 rounded-full border shadow-2xl backdrop-blur-md transition-all duration-800 ${isLight ? 'bg-white/80 border-black/20 text-black' : 'bg-[#050505]/95 border-white/20 text-white'}`}
+        style={{ boxShadow: isMuted ? 'none' : `0 0 15px ${weapon.themeColor}50` }}
+      >
+        {isMuted ? (
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+        ) : (
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={weapon.themeColor} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+        )}
+      </button>
 
       {/* Tactical HUD Overlay (Hides injected preview logos on desktop) */}
       <div className={`hidden md:flex fixed bottom-32 right-10 z-[99999] min-h-[90px] flex-col justify-center gap-3 px-8 py-6 rounded-tl-3xl rounded-br-3xl border backdrop-blur-xl shadow-2xl transition-colors duration-800 ${isLight ? 'bg-white/90 border-black/20' : 'bg-[#050505]/95 border-white/10'}`}>
