@@ -61,10 +61,10 @@ export default function SequenceScroll({ weapon }: SequenceScrollProps) {
       ctx.fillStyle = weapon.themeMode === 'light' ? '#e0f7fa' : '#050505';
       ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
       
-      // Calculate responsive sizing (contain fit) using window.innerWidth/Height
+      // Calculate responsive sizing (cover fit) using window.innerWidth/Height
       const hRatio = window.innerWidth / img.width;
       const vRatio = window.innerHeight / img.height;
-      const ratio = Math.min(hRatio, vRatio);
+      const ratio = Math.max(hRatio, vRatio); // Changed from Math.min to Math.max for cover effect
       
       const centerShift_x = (window.innerWidth - img.width * ratio) / 2;
       const centerShift_y = (window.innerHeight - img.height * ratio) / 2;
@@ -128,7 +128,7 @@ export default function SequenceScroll({ weapon }: SequenceScrollProps) {
       >
         <canvas 
           ref={canvasRef} 
-          className="w-full h-full object-contain opacity-90 mix-blend-normal"
+          className="w-full h-full object-cover opacity-90 mix-blend-normal"
           style={{ width: '100%', height: '100%', pointerEvents: 'none' }} 
         />
         {/* Subtle Tech Grid Overlay */}
