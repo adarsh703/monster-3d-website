@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { weapons } from '@/data/weapons';
 import Navbar from '@/components/Navbar';
@@ -9,6 +9,8 @@ import SequenceScroll from '@/components/SequenceScroll';
 
 export default function Home() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isMuted, setIsMuted] = useState(true);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   // Scroll Reset and Theme Management on change
   useEffect(() => {
@@ -26,15 +28,32 @@ export default function Home() {
       root.style.setProperty('--selection-bg', weapon.themeColor);
       root.style.setProperty('--selection-color', '#ffffff');
     } else {
-      root.style.setProperty('--bg-color', '#050505'); // Pitch black
-      root.style.setProperty('--text-primary', '#ffffff'); // White text
-      root.style.setProperty('--selection-bg', weapon.themeColor);
-      root.style.setProperty('--selection-color', '#000000');
+      root.style.setProperty('--bg-color', '#050505');
+      root.style.setProperty('--text-primary', '#ffffff');
+      root.style.setProperty('--selection-bg', weapon.themeColor + '40');
     }
   }, [currentIndex]);
 
   const weapon = weapons[currentIndex];
   const isLight = weapon.themeMode === 'light';
+
+  // Handle Audio Tracks
+  useEffect(() => {
+    if (!audioRef.current) {
+      audioRef.current = new Audio();
+      audioRef.current.loop = true;
+    }
+    
+    audioRef.current.src = currentIndex === 0 ? '/original-audio.mp3' : '/ultra-audio.mp3';
+    
+    if (!isMuted) {
+      audioRef.current.play().catch(e => console.log('Audio autoplay blocked', e));
+    } else {
+      audioRef.current.pause();
+    }
+  }, [currentIndex, isMuted]);
+
+  const toggleAudio = () => setIsMuted(!isMuted);
 
   return (
     <main className="min-h-screen bg-transparent  overflow-x-hidden">
@@ -217,7 +236,7 @@ export default function Home() {
 
       {/* Tactical HUD Overlay (Hides injected preview logos on desktop) */}
       <div className={`hidden md:flex fixed bottom-32 right-10 z-[99999] min-h-[90px] flex-col justify-center gap-3 px-8 py-6 rounded-tl-3xl rounded-br-3xl border backdrop-blur-xl shadow-2xl transition-colors duration-800 ${isLight ? 'bg-white/90 border-black/20' : 'bg-[#050505]/95 border-white/10'}`}>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 border-b pb-3 mb-1" style={{ borderBottomColor: isLight ? 'rgba(0,0,0,0.1)' : 'rgba(255,255,255,0.1)' }}>
           <div className="relative flex items-center justify-center w-4 h-4">
             <div className="absolute inset-0 rounded-full animate-ping opacity-50" style={{ backgroundColor: weapon.themeColor }}></div>
             <div className="relative w-2 h-2 rounded-full" style={{ backgroundColor: weapon.themeColor }}></div>
@@ -231,6 +250,12 @@ export default function Home() {
             </span>
           </div>
         </div>
+        <button 
+          onClick={toggleAudio}
+          className={`text-[10px] font-bold tracking-[0.3em] uppercase text-left transition-colors duration-300 ${isLight ? 'text-gray-600 hover:text-black' : 'text-gray-400 hover:text-white'}`}
+        >
+          AUDIO: <span style={{ color: isMuted ? 'inherit' : weapon.themeColor }}>{isMuted ? 'MUTED' : 'LIVE'}</span>
+        </button>
       </div>
 
       <Footer themeColor={weapon.themeColor} isLight={isLight} />
