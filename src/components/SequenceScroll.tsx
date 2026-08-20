@@ -57,6 +57,10 @@ export default function SequenceScroll({ weapon }: SequenceScrollProps) {
       // Normalize coordinate system to use css pixels.
       ctx.scale(dpr, dpr);
       
+      // Force highest quality rendering interpolation
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = 'high';
+      
       // Match the background color to the theme mode
       ctx.fillStyle = weapon.themeMode === 'light' ? '#e0f7fa' : '#050505';
       ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
