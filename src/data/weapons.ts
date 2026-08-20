@@ -32,7 +32,7 @@ export const weapons: Weapon[] = [
         subName: "Unleash the Beast.",
         price: "Unlock",
         description: "Matte Black Alloy - Neon Green Core - High-Octane Energy",
-        folderPath: "/monster_frames_woman",
+        folderPath: "/monster_frames_v2",
         themeColor: "#00FF00",
         themeMode: 'dark',
         gradient: "linear-gradient(135deg, #00FF00 0%, #008800 100%)",
